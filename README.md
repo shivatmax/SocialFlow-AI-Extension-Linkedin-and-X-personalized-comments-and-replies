@@ -2,7 +2,8 @@
 
 **SocialFlow AI** is a powerful Chrome Extension that supercharges your **LinkedIn** and **X (Twitter)** engagement using advanced AI (OpenAI & Google Gemini). It helps you write smart, context-aware comments, replies, and posts in seconds, tailored to *your* unique voice.
 
-![SocialFlow AI Mockup](public/Screenshorts/popup-main-interface.png)
+![LinkedIn Integration](public/Screenshorts/linkedin-comment-menu.png)
+![SocialFlow AI Popup](public/Screenshorts/popup-main-interface.png)
 
 ## ✨ Features
 
