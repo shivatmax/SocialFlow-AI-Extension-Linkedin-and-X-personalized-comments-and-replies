@@ -2,7 +2,7 @@
 
 **SocialFlow AI** is a powerful Chrome Extension that supercharges your **LinkedIn** and **X (Twitter)** engagement using advanced AI (OpenAI & Google Gemini). It helps you write smart, context-aware comments, replies, and posts in seconds, tailored to *your* unique voice.
 
-![SocialFlow AI Mockup](public/icons/icon-128.png) <!-- Replace with a real screenshot if available -->
+![SocialFlow AI Mockup](public/Screenshorts/popup-main-interface.png)
 
 ## ✨ Features
 
@@ -13,7 +13,7 @@ SocialFlow AI doesn't just write generic text. It reads the post you are replyin
 
 ### 🤖 **Dual AI Engine Support**
 Choose your preferred AI powerhouse:
-- **OpenAI**: Supports `GPT-5.2`to `GPT-4o-mini`, and custom models. (Requires API Key).
+- **OpenAI**: Supports `GPT-5.2`, `GPT-4o`, `GPT-4o-mini`, and custom models. (Requires API Key).
 - **Google Gemini (Free Tier)**: Supports `Gemini 2.5 Pro`, `Gemini 2.5 Flash` (Fast & Free/Low cost).
 
 ### 🎭 **Personalization & Memory (The "You" Factor)**
@@ -57,6 +57,9 @@ Since this is a developer preview/local version, you will install it as an "Unpa
 
 Before using the extension, you need to set up your AI provider.
 
+![Settings API Config](public/Screenshorts/settings-api-config.png)
+![Settings Persona & Actions](public/Screenshorts/settings-persona-actions.png)
+
 1.  Click the **SocialFlow AI icon** in your Chrome toolbar.
 2.  Click the **Settings (⚙️)** icon in the popup.
 3.  **Choose AI Provider**:
@@ -75,8 +78,11 @@ Before using the extension, you need to set up your AI provider.
 1.  **Navigate** to a post or comment section.
 2.  Click the **Reply** or **Comment** box.
 3.  You will see a magic **✨ button** appear inside or near the text box.
+    ![Twitter Reply Integration](public/Screenshorts/twitter-reply-integration.png)
 4.  **Click the ✨ button** to open the menu.
 5.  Select a style (e.g., "Suggest", "Funny") or use a Custom Action.
+    ![LinkedIn Comment Menu](public/Screenshorts/linkedin-comment-menu.png)
+    ![Twitter Reply Menu](public/Screenshorts/twitter-reply-menu.png)
 6.  The AI will read the context and fill the box with a draft.
 7.  **Edit** as needed. If you love it, click **"Save Style"** on the toast notification to train the AI!
 
