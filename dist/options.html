@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SocialFlowAI Settings</title>
+    <style>
+        :root {
+            --primary: #7C3AED;
+            --primary-hover: #6D28D9;
+            --primary-light: #DDD6FE;
+            --primary-bg: #F3E8FF;
+            --bg-color: #F9FAFB;
+            --card-bg: #FFFFFF;
+            --text-main: #111827;
+            --text-muted: #6B7280;
+            --border: #E5E7EB;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 12px;
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.5;
+        }
+
+        .container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, #7C3AED, #EC4899);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        h1 {
+            color: var(--text-main);
+            margin: 0;
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 4px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .section:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .section:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+        }
+
+        .section-number {
+            background: var(--primary-bg);
+            color: var(--primary);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: 800;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.9rem;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            transition: var(--transition);
+            background: #F9FAFB;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px var(--primary-bg);
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--text-main);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-secondary:hover {
+            background: #F3F4F6;
+            border-color: #D1D5DB;
+        }
+
+        .btn-delete {
+            background: #FEE2E2;
+            color: #EF4444;
+            padding: 6px 12px;
+            font-size: 13px;
+            border-radius: 8px;
+            box-shadow: none;
+        }
+
+        .btn-delete:hover {
+            background: #FECACA;
+            color: #DC2626;
+        }
+
+        .status {
+            margin-left: 15px;
+            color: #059669;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Custom Actions Table */
+        .actions-list {
+            margin-bottom: 20px;
+        }
+
+        .action-item {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            background: white;
+            padding: 16px;
+            border-radius: var(--radius);
+            margin-bottom: 12px;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .action-item:hover {
+            border-color: var(--primary-light);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-icon {
+            font-size: 24px;
+            width: 40px;
+            height: 40px;
+            background: var(--primary-bg);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-details {
+            flex-grow: 1;
+        }
+
+        .action-label {
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .action-prompt {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 450px;
+        }
+
+        .add-action-form {
+            background: #F8FAFC;
+            padding: 24px;
+            border-radius: var(--radius);
+            border: 2px dashed var(--border);
+            transition: var(--transition);
+        }
+
+        .add-action-form:focus-within {
+            border-color: var(--primary-light);
+            background: var(--primary-bg);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .form-group {
+            flex: 1;
+        }
+
+        .form-group input {
+            margin-bottom: 0;
+            background: white;
+        }
+
+        .api-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: -12px;
+            margin-bottom: 24px;
+            background: #FEF3C7;
+            padding: 10px;
+            border-radius: 8px;
+            color: #92400E;
+            display: inline-block;
+        }
+
+        #memoryList {
+            max-height: 200px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            margin-bottom: 16px;
+            padding: 8px;
+            background: #F9FAFB;
+        }
+
+        .memory-item {
+            font-size: 0.9rem;
+            padding: 8px 12px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted);
+        }
+
+        .memory-item:last-child {
+            border-bottom: none;
+        }
+
+        .footer {
+            border-top: 1px solid var(--border);
+            margin-top: 40px;
+            padding-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="brand-icon">
+                <img src="icons/icon-48.png" alt="SocialFlowAI Logo" width="24" height="24">
+            </div>
+            <div>
+                <h1>SocialFlowAI Settings</h1>
+                <p class="subtitle">Customize your AI assistant's personality and behavior</p>
+            </div>
+        </header>
+
+        <!-- API CONFIGURATION -->
+        <div class="section">
+            <h2><span class="section-number">1</span> API Configuration</h2>
+
+            <label for="aiProvider">AI Provider</label>
+            <select id="aiProvider">
+                <option value="openai">OpenAI (GPT)</option>
+                <option value="gemini">Google Gemini</option>
+            </select>
+
+            <label for="apiKey">API Key</label>
+            <input type="password" id="apiKey" placeholder="Paste your API Key here...">
+            <div class="api-note">🔒 Keys are stored securely in your local browser storage.</div>
+
+            <label for="modelSelect">AI Model</label>
+            <select id="modelSelect"></select>
+            <input type="text" id="customModelInput" placeholder="Enter Model ID" style="display:none; margin-top:5px;">
+        </div>
+
+        <!-- PERSONA -->
+        <div class="section">
+            <h2><span class="section-number">2</span> Your Persona</h2>
+            <label for="userBio">Who are you? (Bio / Professional Summary)</label>
+            <textarea id="userBio"
+                placeholder="e.g. I am a Senior Product Manager at TechFin. I write about AI, product strategy, and remote work. I value actionable advice and clear thinking."></textarea>
+
+            <label for="userTone">Communication Style / Tone</label>
+            <input type="text" id="userTone" placeholder="e.g. Professional, witty, direct, empathetic, use 1-2 emojis">
+        </div>
+
+        <!-- CUSTOM ACTIONS -->
+        <div class="section">
+            <h2><span class="section-number">3</span> Custom Quick Actions</h2>
+            <p style="color:var(--text-muted); margin-bottom:16px;">Create custom buttons for your most frequent tasks.
+            </p>
+
+            <div class="actions-list" id="actionsList">
+                <!-- Populated by JS -->
+            </div>
+
+            <div class="add-action-form">
+                <div style="font-weight:700; margin-bottom:12px; color:var(--text-main);">+ New Custom Action</div>
+                <div class="form-row">
+                    <div class="form-group" style="flex: 0 0 60px;">
+                        <input type="text" id="newActionIcon" placeholder="Icon" style="text-align:center;">
+                    </div>
+                    <div class="form-group" style="flex: 0 0 180px;">
+                        <input type="text" id="newActionLabel" placeholder="Label (e.g. Roast)">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="newActionPrompt"
+                            placeholder="Instruction (e.g. Roast this post playfully)">
+                    </div>
+                </div>
+                <button class="btn btn-secondary" id="addActionBtn" style="width:100%; justify-content:center;">Add
+                    Action Button</button>
+            </div>
+        </div>
+
+        <!-- MEMORY -->
+        <div class="section">
+            <h2><span class="section-number">4</span> Reply Memory</h2>
+            <p style="color:var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Replies you "Like" are saved
+                here to improve future suggestions.</p>
+            <div id="memoryList">
+                <!-- Populated by JS -->
+            </div>
+            <button class="btn btn-secondary btn-delete" id="clearMemory">Clear Memories</button>
+        </div>
+
+        <div class="footer">
+            <button class="btn" id="saveBtn">
+                Save All Settings
+            </button>
+            <span class="status" id="status">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                </svg>
+                Settings Saved Successfully!
+            </span>
+        </div>
+    </div>
+    <script src="options.js"></script>
+</body>
+
+</html>

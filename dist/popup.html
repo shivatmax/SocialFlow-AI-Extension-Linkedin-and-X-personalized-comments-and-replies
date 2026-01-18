@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SocialFlowAI</title>
+  <style>
+    :root {
+      --primary: #7C3AED;
+      --primary-hover: #6D28D9;
+      --primary-light: #DDD6FE;
+      --bg-color: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --text-main: #111827;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --radius: 12px;
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      width: 400px;
+      padding: 20px;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      margin: 0;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      max-height: 600px;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      scrollbar-color: var(--primary-light) transparent;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--primary-light);
+      border-radius: 20px;
+    }
+
+    header {
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #7C3AED, #EC4899);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 18px;
+      box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);
+    }
+
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+      background: linear-gradient(90deg, #111827, #4B5563);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .description {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin: 0;
+      font-weight: 500;
+    }
+
+    #settings-btn {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 16px;
+    }
+
+    #settings-btn:hover {
+      background: var(--bg-color);
+      color: var(--primary);
+      border-color: var(--primary-light);
+      transform: rotate(30deg);
+    }
+
+    /* Modern Tabs */
+    .tabs-container {
+      background: var(--card-bg);
+      padding: 4px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+
+    .tabs {
+      display: flex;
+      position: relative;
+      gap: 2px;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 8px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 0.825rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      position: relative;
+      z-index: 1;
+      border-radius: 8px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .tab:hover {
+      color: var(--text-main);
+      background: rgba(0, 0, 0, 0.02);
+    }
+
+    .tab.active {
+      color: var(--primary);
+      background: var(--primary-light);
+    }
+
+    .tab.active::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 8px;
+      background: rgba(124, 58, 237, 0.1);
+      z-index: -1;
+    }
+
+    /* Prompt Area */
+    .prompt-area {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      font-size: 0.825rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-main);
+    }
+
+    textarea {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid transparent;
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      min-height: 120px;
+      box-sizing: border-box;
+      font-family: inherit;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      resize: vertical;
+    }
+
+    textarea::placeholder {
+      color: #9CA3AF;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-light);
+    }
+
+    textarea:hover {
+      box-shadow: var(--shadow-md);
+    }
+
+    .note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      text-align: right;
+      font-weight: 500;
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border-radius: 40px;
+      /* Pill shape */
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: var(--transition);
+      letter-spacing: 0.02em;
+    }
+
+    button:active {
+      transform: scale(0.96);
+    }
+
+    .cancel-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+    }
+
+    .cancel-btn:hover {
+      color: var(--text-main);
+      background: rgba(0, 0, 0, 0.03);
+    }
+
+    .generate-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, #9333ea 100%);
+      color: white;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+    }
+
+    .generate-btn:hover {
+      box-shadow: 0 6px 16px rgba(124, 58, 237, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .generate-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Result Area */
+    .result {
+      margin-top: 24px;
+      display: none;
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-card {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .result-header {
+      background: #F8FAFC;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .result-header h3 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin: 0;
+      font-weight: 700;
+    }
+
+    .result-text {
+      padding: 16px;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      white-space: pre-wrap;
+      max-height: 250px;
+      overflow-y: auto;
+    }
+
+    .copy-btn {
+      padding: 6px 12px;
+      font-size: 0.75rem;
+      background: white;
+      color: var(--primary);
+      border: 1px solid var(--primary-light);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .copy-btn:hover {
+      background: var(--primary-light);
+    }
+
+    .copy-btn svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Loading State */
+    .loading {
+      text-align: center;
+      display: none;
+      margin: 30px 0;
+    }
+
+    .loading-spinner {
+      margin: 0 auto 12px;
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(124, 58, 237, 0.2);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      background: linear-gradient(90deg, #7C3AED, #EC4899, #7C3AED);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 0.9rem;
+      font-weight: 600;
+      animation: shimmer 2s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes shimmer {
+      to {
+        background-position: 200% center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="brand">
+      <div class="brand-icon">
+        <img src="icons/icon-48.png" alt="SocialFlowAI Logo" width="24" height="24">
+      </div>
+      <div>
+        <h1>SocialFlowAI</h1>
+        <p class="description">Your AI Growth Partner</p>
+      </div>
+    </div>
+    <button id="settings-btn" title="Settings">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 15.5C13.933 15.5 15.5 13.933 15.5 12C15.5 10.067 13.933 8.5 12 8.5C10.067 8.5 8.5 10.067 8.5 12C8.5 13.933 10.067 15.5 12 15.5Z" />
+        <path fill-rule="evenodd" clip-rule="evenodd"
+          d="M19.4385 12C19.4385 12.0622 19.4377 12.1242 19.4362 12.186L19.5053 12.3592L21.321 13.2575C21.6773 13.4338 21.82 13.8569 21.6253 14.1951L19.9575 17.0874C19.7423 17.4604 19.3175 17.6186 18.9189 17.481L16.9427 16.8925L16.7118 17.0625C16.4022 17.29 16.0361 17.4725 15.6562 17.6322L15.3999 17.7399L15.2891 18.0001L14.7797 19.9881C14.6749 20.3972 14.2844 20.7303 13.8643 20.7303H10.518C10.0911 20.7303 9.70417 20.3905 9.60565 19.976L9.1245 18.0001L9.01369 17.7399L8.75735 17.6322C8.36979 17.4693 7.99676 17.2829 7.68164 17.0505L7.45935 16.8864L5.48312 17.481C5.08447 17.6186 4.65968 17.4604 4.4445 17.0874L2.77665 14.1951C2.58197 13.8569 2.72465 13.4338 3.08092 13.2575L4.89665 12.3592L4.96576 12.186C4.96425 12.1242 4.96348 12.0621 4.96348 12C4.96348 11.9379 4.96425 11.8758 4.96576 11.814L4.89665 11.6408L3.08092 10.7425C2.72465 10.5662 2.58197 10.1431 2.77665 9.80491L4.4445 6.91256C4.65968 6.53965 5.08447 6.38139 5.48312 6.51896L7.45935 7.11356L7.68164 6.94947C7.99676 6.7171 8.36979 6.5307 8.75735 6.36783L9.01369 6.26008L9.1245 5.99996L9.60565 4.02403C9.70417 3.60953 10.0911 3.26965 10.518 3.26965H13.8643C14.2844 3.26965 14.6749 3.60278 14.7797 4.01188L15.2891 5.99996L15.3999 6.26008L15.6562 6.36783C16.0361 6.52747 16.4022 6.70997 16.7118 6.93748L16.9427 7.10748L18.9189 6.51896C19.3175 6.38139 19.7423 6.53965 19.9575 6.91256L21.6253 9.80491C21.82 10.1431 21.6773 10.5662 21.321 10.7425L19.5053 11.6408L19.4362 11.814C19.4377 11.8758 19.4385 11.9378 19.4385 12Z" />
+      </svg>
+    </button>
+  </header>
+
+  <div class="tabs-container">
+    <div class="tabs">
+      <button class="tab active" data-type="new">
+        <span>📝</span> New Post
+      </button>
+      <button class="tab" data-type="reply">
+        <span>💬</span> Reply
+      </button>
+      <button class="tab" data-type="repost">
+        <span>🔁</span> Repost
+      </button>
+    </div>
+  </div>
+
+  <div class="prompt-area">
+    <label id="prompt-label" for="prompt-input">What would you like to create?</label>
+    <textarea id="prompt-input" placeholder="e.g., Share a key lesson I learned about leadership today..."></textarea>
+    <div class="note">CMD/CTRL + ENTER to generate</div>
+  </div>
+
+  <div class="actions">
+    <button class="cancel-btn" id="cancel-btn">Clear</button>
+    <button class="generate-btn" id="generate-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path
+          d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+      </svg>
+      Generate Magic
+    </button>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Crafting your content...</div>
+  </div>
+
+  <div class="result" id="result">
+    <div class="result-card">
+      <div class="result-header">
+        <h3>Generated Draft</h3>
+        <button class="copy-btn" id="copy-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+          </svg>
+          Copy
+        </button>
+      </div>
+      <div class="result-text" id="result-text"></div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+{
+  "name": "SocialFlowAI",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "build-extension": "next build && rm -rf dist && mkdir -p dist && cp -r public/* dist/ && cp -r .next/static dist/static",
+    "dev-extension": "mkdir -p dist && cp -r public/* dist/ && concurrently \"next dev\" \"nodemon --watch public --ext js,html,css,svg,json --exec 'cp -r public/* dist/'\"",
+    "watch-extension": "nodemon --watch public --ext js,html,css,svg,json --exec 'cp -r public/* dist/'"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "next": "15.3.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "concurrently": "^9.1.2",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.1",
+    "nodemon": "^3.1.9",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
